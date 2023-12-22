@@ -37,12 +37,12 @@ public class CalenderInterceptor implements HandlerInterceptor {
 
         /* implement closed */
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> json = new HashMap<>();
+        Map<String, String> json = new HashMap<>();
         StringBuilder message = new StringBuilder("The system closed now. ");
         message.append(close);
         message.append(" hrs.");
         json.put("message", message.toString());
-        json.put("date", new Date());
+        json.put("date", new Date().toString());
         response.setContentType("application/json");
         response.setStatus(401);
         response.getWriter().write(mapper.writeValueAsString(json));
