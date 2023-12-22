@@ -1,5 +1,6 @@
 package com.iffat.springboot.interceptor.interceptors;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +9,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class CalenderInterceptor implements HandlerInterceptor {
@@ -30,6 +34,19 @@ public class CalenderInterceptor implements HandlerInterceptor {
             request.setAttribute("message", message);
             return true;
         }
+
+        /* implement closed */
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> json = new HashMap<>();
+        StringBuilder message = new StringBuilder("The system closed now. ");
+        message.append(close);
+        message.append(" hrs.");
+        json.put("message", message.toString());
+        json.put("date", new Date());
+        response.setContentType("application/json");
+        response.setStatus(401);
+        response.getWriter().write(mapper.writeValueAsString(json));
+
         return false;
     }
 
