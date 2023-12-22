@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "config.calender.open",
+      "type": "java.lang.String",
+      "description": "Description for config.calender.open."
+    },
+    {
+      "name": "config.calender.close",
+      "type": "java.lang.String",
+      "description": "Description for config.calender.close."
+    }
+  ] }
